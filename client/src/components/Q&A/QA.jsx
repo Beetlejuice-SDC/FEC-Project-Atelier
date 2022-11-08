@@ -42,25 +42,25 @@ const QuestionsAndAnswers = ({ productId, productName, photoWidget, images, setI
   };
 
   const handleQuestionHelpfulClick = (item) => {
-    const userLookup = JSON.parse(localStorage.getItem([document.cookie]));
-    if (!userLookup[`QID${item.question_id}`]) {
-      axios.put(`/qa/questions/${item.question_id}/helpful`)
-        .then(() => {
-          for (let i = 0; i < questionsList.length; i++) {
-            if (item.question_id === questionsList[i].question_id) {
-              setQuestionsList((data) => {
-                let newData = data.slice();
-                newData[i].question_helpfulness += 1;
-                return newData;
-              });
-            }
+    // const userLookup = JSON.parse(localStorage.getItem([document.cookie]));
+    // if (!userLookup[`QID${item.question_id}`]) {
+    axios.put(`/qa/questions/${item.question_id}/helpful`)
+      .then(() => {
+        for (let i = 0; i < questionsList.length; i++) {
+          if (item.question_id === questionsList[i].question_id) {
+            setQuestionsList((data) => {
+              let newData = data.slice();
+              newData[i].question_helpfulness += 1;
+              return newData;
+            });
           }
-          userLookup[`QID${item.question_id}`] = true;
-          localStorage.setItem(`${document.cookie}`, JSON.stringify(userLookup));
-        })
-        .catch(err => console.log(err));
-    }
+        }
+        // userLookup[`QID${item.question_id}`] = true;
+        // localStorage.setItem(`${document.cookie}`, JSON.stringify(userLookup));
+      })
+      .catch(err => console.log(err));
   };
+
 
   const handleQuestionReport = (item) => {
     axios.put(`/qa/questions/${item.question_id}/report`).catch(err => console.log(err));
@@ -164,5 +164,6 @@ const QuestionsAndAnswers = ({ productId, productName, photoWidget, images, setI
     </div>
   );
 };
+
 
 export default QuestionsAndAnswers;

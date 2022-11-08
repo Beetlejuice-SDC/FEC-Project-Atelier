@@ -49,7 +49,7 @@ const App = () => {
       elem.addEventListener('click', trackClicks);
     });
 
-    //   // Determine unique user
+    // Determine unique user
     // let uniqueUser = localStorage.getItem(document.cookie);
     // uniqueUser = JSON.parse(uniqueUser);
     // if (uniqueUser.cookie !== document.cookie) {
